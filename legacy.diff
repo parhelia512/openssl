@@ -1,8 +1,8 @@
 diff --git a/crypto/threads_win.c b/crypto/threads_win.c
-index bcc6098191..e9afc3ade6 100644
+index 97b6d3eb73..db66e39640 100644
 --- a/crypto/threads_win.c
 +++ b/crypto/threads_win.c
-@@ -474,8 +474,14 @@ CRYPTO_RWLOCK *CRYPTO_THREAD_lock_new(void)
+@@ -452,8 +452,14 @@ CRYPTO_RWLOCK *CRYPTO_THREAD_lock_new(void)
  #  if !defined(_WIN32_WCE)
      /* 0x400 is the spin count value suggested in the documentation */
      if (!InitializeCriticalSectionAndSpinCount(lock, 0x400)) {
@@ -19,19 +19,19 @@ index bcc6098191..e9afc3ade6 100644
      }
  #  else
      InitializeCriticalSection(lock);
-diff --git a/include/internal/e_os.h b/include/internal/e_os.h
-index 003d63e17f..62e18c5fbd 100644
---- a/include/internal/e_os.h
-+++ b/include/internal/e_os.h
-@@ -107,7 +107,7 @@
-         * at run-time [DSO_global_lookup is recommended]...
-         */
- #    include <winsock2.h>
--#    include <ws2tcpip.h>
-+#    include <wspiapi.h>
-        /*
-         * Clang-based C++Builder 10.3.3 toolchains cannot find C inline
-         * definitions at link-time.  This header defines WspiapiLoad() as an
+diff --git a/include/internal/e_winsock.h b/include/internal/e_winsock.h
+index 72a38a529f..be2721771c 100644
+--- a/include/internal/e_winsock.h
++++ b/include/internal/e_winsock.h
+@@ -36,7 +36,7 @@
+        * at run-time [DSO_global_lookup is recommended]...
+        */
+ #   include <winsock2.h>
+-#   include <ws2tcpip.h>
++#   include <wspiapi.h>
+       /*
+        * Clang-based C++Builder 10.3.3 toolchains cannot find C inline
+        * definitions at link-time.  This header defines WspiapiLoad() as an
 diff --git a/providers/implementations/rands/seeding/rand_win.c b/providers/implementations/rands/seeding/rand_win.c
 index ee2d3e4d7f..e4c6794820 100644
 --- a/providers/implementations/rands/seeding/rand_win.c

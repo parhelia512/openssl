@@ -1,4 +1,4 @@
-# OpenSSL 3.4.1 static library - built with Visual Studio 2022 CE, MinGW-w64 (cross)
+# OpenSSL 3.5.2 static library - built with Visual Studio 2022 CE, MinGW-w64 (cross)
 
 ## Visual Studio (with VS cmd, unpack the archive with Windows 10 tar)
 
@@ -34,6 +34,14 @@ nmake install_dev
 
 ```sh
 ./Configure mingw no-apps no-async no-capieng no-deprecated no-docs no-dso no-module no-pinshared no-shared no-tests --cross-compile-prefix=i686-w64-mingw32- --prefix=`pwd`/../dist
+make -jX
+make install_dev
+```
+
+### x86 legacy build (-D\_WIN32\_WINNT=0x0501)
+
+```sh
+./Configure mingw no-apps no-async no-capieng no-deprecated no-docs no-dso no-module no-pinshared no-shared no-tests no-sse2 --cross-compile-prefix=i686-w64-mingw32- --prefix=`pwd`/../dist-legacy
 make -jX
 make install_dev
 ```
